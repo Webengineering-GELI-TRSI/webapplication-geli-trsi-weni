@@ -1,0 +1,50 @@
+:root {
+  --main-color: #0066cc;
+  --background: #f9f9f9;
+  --text-color: #333;
+  --font-base: 'Segoe UI', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+main{
+  display: grid;
+  grid-template-columns: 1fr, 5fr, 1fr;
+  grid-template-areas:
+      'left top right'
+      'left inputs right';
+  grid-gap: 10px;
+}
+
+.left{
+  grid-area: left;
+}
+
+.right{
+  grid-area: right;
+}
+
+.top{
+  grid-area: top;
+  text-align: center;
+}
+
+.inputs{
+  grid-area: inputs;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+input[type=text]{
+    width: 100%;
+    padding: 12px 12px;
+    margin: 8px;
+}
+
+input[type=button]{
+  display:block;
+  margin: 8px auto;
+}
