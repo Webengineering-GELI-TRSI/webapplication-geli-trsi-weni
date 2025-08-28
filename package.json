@@ -1,12 +1,9 @@
 {
-  "name": "02_webapplications",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {},
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
   "devDependencies": {
     "@playwright/test": "1.53.1",
     "@types/node": "24.0.3"
