@@ -11,8 +11,8 @@ test('get route', async ({ page }) => {
 
   await page.goto(url);
 
-  await page.getByLabel("from").fill(from);
-  await page.getByLabel("to").fill(to);
+  await page.getByPlaceholder("from").fill(from);
+  await page.getByPlaceholder("to").fill(to);
 
   await page.getByRole('button').click();
 
