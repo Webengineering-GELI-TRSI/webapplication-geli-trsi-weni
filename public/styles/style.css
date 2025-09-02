@@ -1,50 +1,30 @@
 :root {
-  --main-color: #0066cc;
-  --background: #f9f9f9;
-  --text-color: #333;
-  --font-base: 'Segoe UI', sans-serif;
+  color-scheme: light dark;
 }
 
-* {
-  box-sizing: border-box;
+body {
+    display: flex;
+    background-color: light-dark(white, black);
+    color: light-dark(black, white);
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    flex-direction: column;
+    min-height: 100dvh;
 }
 
-main{
-  display: grid;
-  grid-template-columns: 1fr, 5fr, 1fr;
-  grid-template-areas:
-      'left top right'
-      'left inputs right';
-  grid-gap: 10px;
+main {
+    flex: 1 1 auto;
 }
 
-.left{
-  grid-area: left;
+header {
+    padding: 16px;
 }
 
-.right{
-  grid-area: right;
+form {
+    display: flex;
+    gap: 16px;
 }
 
-.top{
-  grid-area: top;
-  text-align: center;
-}
-
-.inputs{
-  grid-area: inputs;
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-}
-
-input[type=text]{
-    width: 100%;
-    padding: 12px 12px;
-    margin: 8px;
-}
-
-input[type=button]{
-  display:block;
-  margin: 8px auto;
+#map {
+    height: 100vh;
 }

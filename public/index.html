@@ -1,23 +1,29 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Webapplikation zur Routenberechnung">
-        <meta name="keywords" content="HTML, CSS, Javascript">
-        <meta name="author" content="Nicolas_Weber, Livio_Gerber, Simon_Truttmann">
         <title>Routenberechnung</title>
-        <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="/styles/style.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+        <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        <script defer src="/scripts/main.js"></script>
     </head>
-    <main>
-        <h1 class="top">Routenberechnung</h1>
-        <div class="left"></div>
-        <div class="inputs">
+    <body>
+        <header>
             <form>
-                <input type="text" id="start" name="start" placeholder="Von wo?"><br><br>
-                <input type="text" id="end" name="end" placeholder="Bis?"><br>
-                <input type="button" value="Eingabe">
+                <div>
+                    <label for="from">Von</label>
+                    <input type="text" id="from" name="from">
+                </div>
+                <div>
+                    <label for="to">Nach</label>
+                    <input type="text" id="to" name="to">
+                </div>
+                <button type="submit">Suche küzerster Weg</button>
             </form>
-        </div>
-        <div class="right"></div>
-    </main>
+        </header>
+        <main>
+            <div id="map"></div>
+        </main>
+    </body>
 </html>

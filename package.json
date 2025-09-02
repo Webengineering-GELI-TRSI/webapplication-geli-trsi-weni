@@ -4,10 +4,12 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "body-parser": "^2.2.0",
     "express": "^5.1.0"
   },
   "devDependencies": {
     "@playwright/test": "1.53.1",
-    "@types/node": "24.0.3"
+    "@types/node": "24.0.3",
+    "leaflet": "^1.9.4"
   }
 }
