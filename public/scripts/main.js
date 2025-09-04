@@ -1,21 +1,36 @@
-const routeForm = document.getElementById("route");
-const fromInput = document.getElementById("from");
-const toInput = document.getElementById("from");
+const params = new URLSearchParams(window.location.search);
 
-fromInput.addEventListener("input", (event) => {
+const inputFrom = document.getElementById('from')
+const inputTo = document.getElementById('to')
 
-});
+let waypoints = [];
 
-toInput.addEventListener("input", (event) => {
+if (params.has('from') && params.has('to')) {
+    const from = params.get('from');
+    const to = params.get('to');
+    const fromSplit = from.split(',');
+    const toSplit = to.split(',');
 
-});
+    inputFrom.value = from;
+    inputTo.value = to;
 
-routeForm.addEventListener("submit", event => {
-    // calculate Route
-    event.preventDefault();
-});
+    waypoints.push(
+        L.latLng(
+            Number(fromSplit[0]),
+            Number(fromSplit[1])
+        )
+    );
 
-let map = L.map('map').setView([51.505, -0.09], 13);
+    waypoints.push(
+        L.latLng(
+            Number(toSplit[0]),
+            Number(toSplit[1])
+        )
+    );
+}
+
+let map = L.map('map')
+    .setView([46.8131873, 8.224119], 8);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -23,22 +38,10 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 const token = 'eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjZkY2RiNzA0ZWRhNDQwNDBiMWY2NjZhMGQxNGFlYWZkIiwiaCI6Im11cm11cjY0In0='
-function calulateRoute(start, end) {
-    let url = 'https://api.openrouteservice.org/v2/directions/foot-walking'
-    url += '?api_key=' + api
-    url += '&start=' + start;
-    url += '&end=' + end;
 
-    fetch(url , {
-        headers: {
-            'Accept': 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8',
-            'Content-Type': 'application/json; charset=utf-8',
-        }
-    })
-    .then(response => {
-
-    })
-    .catch(error => {
-
-    });
-}
+L.Routing.control({
+    router: new L.Routing.OpenRouteService(token, {
+        timeout: 30 * 1000
+    }),
+    waypoints: waypoints
+}).addTo(map);

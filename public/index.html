@@ -5,21 +5,24 @@
         <title>Routenberechnung</title>
         <link rel="stylesheet" href="/styles/style.css">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
         <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        <script defer src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js" crossorigin=""></script>
+        <script defer src="https://unpkg.com/@gegeweb/leaflet-routing-machine-openroute@latest/dist/leaflet-routing-openroute.min.js"></script>
         <script defer src="/scripts/main.js"></script>
     </head>
     <body>
         <header>
-            <form id="route">
-                <div class="input">
+            <form action="/" method="get">
+                <div>
                     <label for="from">Von</label>
-                    <input type="text" id="from" name="from">
+                    <input type="text" name="from" id="from">
                 </div>
                 <div class="input">
                     <label for="to">Nach</label>
-                    <input type="text" id="to" name="to">
+                    <input type="text" name="to" id="to">
                 </div>
-                <button type="submit">Suche küzerster Weg</button>
+                <button type="submit">Suche Weg</button>
             </form>
         </header>
         <main>

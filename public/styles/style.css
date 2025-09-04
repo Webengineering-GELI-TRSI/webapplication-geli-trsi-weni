@@ -1,20 +1,11 @@
-:root {
-  color-scheme: light dark;
-}
-
 body {
     display: flex;
-    background-color: light-dark(white, black);
-    color: light-dark(black, white);
-    font-family: system-ui, sans-serif;
     margin: 0;
     flex-direction: column;
     min-height: 100dvh;
 }
 
 main {
-    display: flex;
-    flex-direction: column;
     flex: 1 1 auto;
 }
 
@@ -22,55 +13,10 @@ header {
     padding: 16px;
 }
 
-.input {
+form {
     display: flex;
-}
-
-.input > label {
-    text-transform: uppercase;
-    font-size: 1rem;
-    line-height: 1;
-    border: 2px solid #fff;
-    padding: .375rem .75rem;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-    font-weight: bold;
-}
-
-.input > input {
-    font-size: 1rem;
-    line-height: 1;
-    border-top: 2px solid #fff;
-    border-right: 2px solid #fff;
-    border-bottom: 2px solid #fff;
-    border-left: 0;
-    padding: .375rem .75rem;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    outline: 4;
-}
-
-button {
-    text-transform: uppercase;
-    border: 2px solid #fff;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    background-color: light-dark(white, black);
-    color: light-dark(black, white);
-    font-weight: bold;
-    border-radius: 8px;
-
-    transition: background-color 100ms, color 100ms;
-}
-
-button:hover {
-    background-color: light-dark(black, white);
-    color: light-dark(white, black);
-}
-
-#route {
-    display: flex;
-    gap: 16px;
+    flex-direction: column;
+    flex: 1 1 auto;
 }
 
 #map {
