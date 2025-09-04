@@ -1,10 +1,26 @@
+const routeForm = document.getElementById("route");
+const fromInput = document.getElementById("from");
+const toInput = document.getElementById("from");
+
+fromInput.addEventListener("input", (event) => {
+
+});
+
+toInput.addEventListener("input", (event) => {
+
+});
+
+routeForm.addEventListener("submit", event => {
+    // calculate Route
+    event.preventDefault();
+});
+
 let map = L.map('map').setView([51.505, -0.09], 13);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
-
 
 const token = 'eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjZkY2RiNzA0ZWRhNDQwNDBiMWY2NjZhMGQxNGFlYWZkIiwiaCI6Im11cm11cjY0In0='
 function calulateRoute(start, end) {
