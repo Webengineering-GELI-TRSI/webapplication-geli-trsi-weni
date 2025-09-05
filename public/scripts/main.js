@@ -43,5 +43,4 @@ L.Routing.control({
     router: new L.Routing.OpenRouteService(token, {
         timeout: 30 * 1000
     }),
-    waypoints: waypoints
 }).addTo(map);
