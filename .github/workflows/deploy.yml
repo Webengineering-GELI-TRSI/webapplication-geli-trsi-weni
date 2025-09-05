@@ -23,7 +23,28 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             set -e
 
-                        APP_DIR=~/webapp
+            APP_DIR=~/webapp
+
+            echo ">>> Prüfe ob Docker, GIT installiert sind..."
+            if ! command -v docker &> /dev/null; then
+              echo ">>> Installiere Docker..."
+              sudo apt-get update
+              sudo apt-get install -y docker.io git
+              sudo systemctl enable docker
+              sudo systemctl start docker
+            fi
+
+
+            echo ">>> Prüfe ob Docker Compose installiert ist..."
+            if ! command -v docker-compose &> /dev/null; then
+              echo ">>> Installiere Docker Compose..."
+              sudo apt-get install -y docker-compose || true
+              # Falls obiges Paket nicht existiert, die Binary-Methode:
+              if ! command -v docker-compose &> /dev/null; then
+                sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-\$(uname -s)-\$(uname -m)" -o /usr/local/bin/docker-compose
+                sudo chmod +x /usr/local/bin/docker-compose
+              fi
+            fi
 
             # Falls Verzeichnis noch kein Git-Repo ist: klonen
             if [ ! -d "$APP_DIR/.git" ]; then
