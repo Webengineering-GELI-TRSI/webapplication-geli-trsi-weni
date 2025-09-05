@@ -35,14 +35,6 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
 
-            # Dockerfile schreiben (falls noch nicht vorhanden)
-            cat > Dockerfile << 'DOCKER'
-            FROM nginx:alpine
-            COPY public/ /usr/share/nginx/html/
-            EXPOSE 80
-            CMD ["nginx", "-g", "daemon off;"]
-            DOCKER
-
             # Image bauen, Container ersetzen
             docker build -t webapp:latest .
             docker stop webapp-container || true
