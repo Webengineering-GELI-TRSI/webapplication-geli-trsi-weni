@@ -39,8 +39,14 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 const token = 'eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjZkY2RiNzA0ZWRhNDQwNDBiMWY2NjZhMGQxNGFlYWZkIiwiaCI6Im11cm11cjY0In0='
 
-L.Routing.control({
-    router: new L.Routing.OpenRouteService(token, {
-        timeout: 30 * 1000
-    }),
-}).addTo(map);
+if (waypoints.length > 0) {
+    L.Routing.control({
+        router: new L.Routing.OpenRouteService(token, { timeout: 30 * 1000 }),
+        waypoints: waypoints,
+        show: true,
+        routeWhileDragging: false
+    }).addTo(map);
+
+    // Optional: Karte automatisch auf Route zoomen
+    map.fitBounds(L.latLngBounds(waypoints));
+}
