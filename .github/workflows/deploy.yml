@@ -44,8 +44,8 @@ jobs:
             DOCKER
 
             # Image bauen, Container ersetzen
-            #docker build -t webapp:latest .
-            #docker stop webapp-container || true
-            #docker rm webapp-container || true
-            #docker run -d -p 80:80 --name webapp-container webapp:latest
+            docker build -t webapp:latest .
+            docker stop webapp-container || true
+            docker rm webapp-container || true
+            docker run -d -p 80:80 --name webapp-container webapp:latest
           EOF
