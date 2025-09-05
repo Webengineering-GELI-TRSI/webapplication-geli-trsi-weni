@@ -23,13 +23,18 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             set -e
 
-            # Verzeichnis erstellen oder hineingehen
-            cd ~/webapp || git clone  git@github.com:Webengineering-GELI-TRSI/webapplication-geli-trsi-weni.git ~/webapp && cd ~/webapp
-            apt install git -y
-            # Aktuellen Branch ziehen
-            git checkout main
-            git pull origin main
-    
+                        APP_DIR=~/webapp
+
+            # Falls Verzeichnis noch kein Git-Repo ist: klonen
+            if [ ! -d "$APP_DIR/.git" ]; then
+              rm -rf $APP_DIR
+              git clone https://github.com/${{ github.repository }} $APP_DIR
+            fi
+
+            cd $APP_DIR
+            git fetch origin main
+            git reset --hard origin/main
+
             # Dockerfile schreiben (falls noch nicht vorhanden)
             cat > Dockerfile << 'DOCKER'
             FROM nginx:alpine
