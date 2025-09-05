@@ -3,62 +3,71 @@ name: CI/CD Deployment
 on:
   push:
     branches:
-      - main  # Passe an deinen Stamm-Branch an (z. B. master)
+      - main   # oder master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Repository auschecken
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: SSH-Agent starten
+      - name: Setup SSH Agent
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
-      - name: Build & Deployment auf Server
+      - name: Deploy to Server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             set -e
-
             APP_DIR=~/webapp
 
-            echo ">>> Prüfe ob Docker, GIT installiert sind..."
-            if ! command -v docker &> /dev/null; then
-              echo ">>> Installiere Docker..."
+            echo ">>> System vorbereiten: Git und Docker prüfen/installieren..."
+
+            # Git installieren, falls nicht vorhanden
+            if ! command -v git &> /dev/null; then
+              echo ">>> Git installieren..."
               sudo apt-get update
-              sudo apt-get install -y docker.io git
+              sudo apt-get install -y git
+            fi
+
+            # Docker installieren, falls nicht vorhanden
+            if ! command -v docker &> /dev/null; then
+              echo ">>> Docker installieren..."
+              sudo apt-get update
+              sudo apt-get install -y docker.io
               sudo systemctl enable docker
               sudo systemctl start docker
             fi
 
-
-            echo ">>> Prüfe ob Docker Compose installiert ist..."
+            # Docker Compose installieren, falls nicht vorhanden
             if ! command -v docker-compose &> /dev/null; then
-              echo ">>> Installiere Docker Compose..."
+              echo ">>> Docker Compose installieren..."
               sudo apt-get install -y docker-compose || true
-              # Falls obiges Paket nicht existiert, die Binary-Methode:
+              # Fallback Binary Methode
               if ! command -v docker-compose &> /dev/null; then
                 sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-\$(uname -s)-\$(uname -m)" -o /usr/local/bin/docker-compose
                 sudo chmod +x /usr/local/bin/docker-compose
               fi
             fi
 
-            # Falls Verzeichnis noch kein Git-Repo ist: klonen
+            echo ">>> Repository klonen oder aktualisieren..."
             if [ ! -d "$APP_DIR/.git" ]; then
               rm -rf $APP_DIR
-              git clone https://github.com/${{ github.repository }} $APP_DIR
+              git clone https://github.com/Webengineering-GELI-TRSI/webapplication-geli-trsi-weni $APP_DIR
             fi
 
             cd $APP_DIR
             git fetch origin main
             git reset --hard origin/main
 
-            # Image bauen, Container ersetzen
+            echo ">>> Docker Build & Run..."
             docker build -t webapp:latest .
             docker stop webapp-container || true
             docker rm webapp-container || true
             docker run -d -p 80:80 --name webapp-container webapp:latest
+
+            echo ">>> Deployment erfolgreich!"
           EOF
