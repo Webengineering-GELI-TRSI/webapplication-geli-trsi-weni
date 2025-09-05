@@ -1,5 +1,8 @@
 # Routen Berechnung Server
 
+
+## Old Version by Livio
+
 ## Getting started
 
 1. Install dependencies
@@ -12,3 +15,17 @@
     ```
 
 // ?waypoints=46.9546447,7.3537365&waypoints=47.3774735,8.4587986
+
+## New Version TRSI
+
+1. Bei einem Git Push wird nun automatisch die Applikation auf dem Linux Server von Livio deployed und im Docker laufen gelassen.
+2. Alle Deploy Konfiguration befinden sich unter .github/workflows/deploy.yml
+3. Geändert wurde noch das Layout unter styles --> Habe überall ein bak file gemacht. Ebenfalls habe ich das Routing gefixt mit den Bulletpoints, sollte nun funktionieren.
+
+4. ToDo: 
+- Routing mit Namen
+- Adressfelder Vorschläge --> Datenbank
+- Häufigste Suchanfragen
+- SQL Injection Angriffe verhindern. 
+- Tests müssen funktionieren
+- API Endpoint zum speichern von persönlichen Routen. --> Dokumentation mit Swagger
