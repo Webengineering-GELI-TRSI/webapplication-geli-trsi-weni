@@ -53,6 +53,13 @@ jobs:
               fi
             fi
 
+            echo ">>> AppArmor prüfen/installieren..."
+            if ! command -v apparmor_parser &> /dev/null; then
+              sudo apt-get update
+              sudo apt-get install -y apparmor
+            fi
+
+
             echo ">>> Repository klonen oder aktualisieren..."
             if [ ! -d "$APP_DIR/.git" ]; then
               rm -rf $APP_DIR
