@@ -24,7 +24,7 @@ jobs:
             set -e
 
             # Verzeichnis erstellen oder hineingehen
-            cd ~/webapp || git clone https://github.com/${{ github.repository }} ~/webapp && cd ~/webapp
+            cd ~/webapp || git clone  git@github.com:Webengineering-GELI-TRSI/webapplication-geli-trsi-weni.git ~/webapp && cd ~/webapp
             apt install git -y
             # Aktuellen Branch ziehen
             git checkout main
