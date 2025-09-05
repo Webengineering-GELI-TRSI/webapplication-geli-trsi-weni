@@ -3,7 +3,7 @@ name: CI/CD Deployment
 on:
   push:
     branches:
-      - main  
+      - main  # Passe an deinen Stamm-Branch an (z. B. master)
 
 jobs:
   deploy:
@@ -25,11 +25,22 @@ jobs:
 
             # Verzeichnis erstellen oder hineingehen
             cd ~/webapp || git clone https://github.com/${{ github.repository }} ~/webapp && cd ~/webapp
-
-            # Git installieren
             apt install git
             # Aktuellen Branch ziehen
             git checkout main
             git pull origin main
+    
+            # Dockerfile schreiben (falls noch nicht vorhanden)
+            cat > Dockerfile << 'DOCKER'
+            FROM nginx:alpine
+            COPY public/ /usr/share/nginx/html/
+            EXPOSE 80
+            CMD ["nginx", "-g", "daemon off;"]
+            DOCKER
 
-        EOF
+            # Image bauen, Container ersetzen
+            #docker build -t webapp:latest .
+            #docker stop webapp-container || true
+            #docker rm webapp-container || true
+            #docker run -d -p 80:80 --name webapp-container webapp:latest
+          EOF
