@@ -26,6 +26,8 @@ jobs:
             # Verzeichnis erstellen oder hineingehen
             cd ~/webapp || git clone https://github.com/${{ github.repository }} ~/webapp && cd ~/webapp
 
+            # Git installieren
+            apt install git
             # Aktuellen Branch ziehen
             git checkout main
             git pull origin main
