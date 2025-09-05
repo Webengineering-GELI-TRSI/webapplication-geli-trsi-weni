@@ -1,0 +1,16 @@
+body {
+    display: flex;
+    margin: 0;
+    flex-direction: column;
+    min-height: 100dvh;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+}
+
+#map {
+    flex: 1 1 auto;
+}
