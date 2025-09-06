@@ -1,4 +1,9 @@
-FROM nginx:alpine
-COPY public/ /usr/share/nginx/html/
+FROM node:24.7-alpine
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY . .
+RUN npm ci
+
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["main.js"]
