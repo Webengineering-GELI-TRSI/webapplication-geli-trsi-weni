@@ -1,8 +1,9 @@
+const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const pgp = require('pg-promise')();
 
-const PORT = 80;
+const PORT = 3000;
 
 const db = pgp({
     host: 'localhost',
@@ -18,7 +19,7 @@ app.use(session({
     secret: '9bXQM0LXf+t4yq64hdtEHmEEHx91FIxC4L7z3JnDE6IZhcZSL8TIBMNrPBz822htQTBCXP2Gks+exKGxGKO33g==',
 }));
 
-router.get('/api/v1/routes', (req, res, next) => {
+app.get('/api/v1/routes', (req, res, next) => {
     db.one({
         name: 'routes-index',
         text: 'SELECT * FROM routes WHERE session = $1 ORDER BY count DESC',
@@ -56,7 +57,7 @@ app.get('/', (req, res) => {
         root: path.join(__dirname)
     };
 
-    console.log(`from: ${request.query.from} to: ${request.query.to}`);
+    console.log(`from: ${req.query.from} to: ${req.query.to}`);
     res.sendFile('public/index.html', options);
 });
 
