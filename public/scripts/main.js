@@ -15,8 +15,8 @@ inputTo.value = to;
 inputFromCord.value = fromCord;
 inputToCord.value = toCord;
 
-autocomplete(inputFrom, inputFromCord);
-autocomplete(inputTo, inputToCord);
+autocompleteElement(inputFrom, inputFromCord);
+autocompleteElement(inputTo, inputToCord);
 
 let map = L.map('map')
     .setView([46.8131873, 8.224119], 8);
@@ -85,7 +85,7 @@ if (
     }
 }
 
-function autocompleteGeo(text) {
+function autocompleteGeocodeAPI(text) {
     return fetch(`https://api.openrouteservice.org/geocode/autocomplete?text=${text}&api_key=${token}`, {
         mode: 'cors'
     })
@@ -103,21 +103,21 @@ function debounce(func, timeout = 300){
     };
 }
 
-function autocomplete(inp, inpCord) {
+function autocompleteElement(input, inputCord) {
     var currentFocus;
-    inp.addEventListener('input', debounce(event => {
-        let val = inp.value;
+    input.addEventListener('input', debounce(event => {
+        let val = input.value;
         closeAllLists();
         if (!val) {
             return false;
         }
         currentFocus = -1;
         let a = document.createElement("div");
-        a.setAttribute("id", inp.id + "autocomplete-list");
+        a.setAttribute("id", input.id + "autocomplete-list");
         a.setAttribute("class", "autocomplete-items");
-        inp.parentNode.appendChild(a);
+        input.parentNode.appendChild(a);
 
-        autocompleteGeo(val)
+        autocompleteGeocodeAPI(val)
             .then(json => {
                 for (const feature of json.features) {
                     let b = document.createElement("div");
@@ -125,8 +125,8 @@ function autocomplete(inp, inpCord) {
                     b.dataset.value = feature.properties.label;
                     b.dataset.cord = feature.geometry.coordinates.join(',');
                     b.addEventListener("click", event => {
-                        inp.value = b.dataset.value;
-                        inpCord.value = b.dataset.cord;
+                        input.value = b.dataset.value;
+                        inputCord.value = b.dataset.cord;
                         closeAllLists();
                     });
                     a.appendChild(b);
@@ -134,7 +134,7 @@ function autocomplete(inp, inpCord) {
             });
     }));
 
-    inp.addEventListener("keydown", event => {
+    input.addEventListener("keydown", event => {
         let x = document.getElementById(this.id + "autocomplete-list");
         if (x) x = x.getElementsByTagName("div");
         if (event.keyCode == 40) {
@@ -168,7 +168,7 @@ function autocomplete(inp, inpCord) {
     function closeAllLists(elmnt) {
         var x = document.getElementsByClassName("autocomplete-items");
         for (var i = 0; i < x.length; i++) {
-            if (elmnt != x[i] && elmnt != inp) {
+            if (elmnt != x[i] && elmnt != input) {
                 x[i].parentNode.removeChild(x[i]);
             }
         }

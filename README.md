@@ -21,9 +21,9 @@
 1. Bei einem Git Push wird nun automatisch die Applikation auf dem Linux Server von Livio deployed und im Docker laufen gelassen.
 2. Alle Deploy Konfiguration befinden sich unter .github/workflows/deploy.yml
 3. Geändert wurde noch das Layout unter styles --> Habe überall ein bak file gemacht. Ebenfalls habe ich das Routing gefixt mit den Bulletpoints, sollte nun funktionieren.
+4. Routing mit Namen
 
 4. ToDo:
-- Routing mit Namen
 - Adressfelder Vorschläge --> Browserseitig
 - Häufigste Suchanfragen
 - SQL Injection Angriffe verhindern.
