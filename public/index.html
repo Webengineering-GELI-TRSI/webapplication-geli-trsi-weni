@@ -14,13 +14,19 @@
     <body>
         <header>
             <form action="/" method="get">
-                <div>
+                <div class="input">
+                    <input type="hidden" name="fromCord" id="fromCord">
                     <label for="from">Von</label>
-                    <input type="text" name="from" id="from">
+                    <div class="autocomplete">
+                        <input type="text" name="from" id="from">
+                    </div>
                 </div>
                 <div class="input">
+                    <input type="hidden" name="toCord" id="toCord">
                     <label for="to">Nach</label>
-                    <input type="text" name="to" id="to">
+                    <div class="autocomplete">
+                        <input type="text" name="to" id="to">
+                    </div>
                 </div>
                 <button type="submit">Suche Weg</button>
             </form>

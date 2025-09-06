@@ -22,10 +22,10 @@
 2. Alle Deploy Konfiguration befinden sich unter .github/workflows/deploy.yml
 3. Geändert wurde noch das Layout unter styles --> Habe überall ein bak file gemacht. Ebenfalls habe ich das Routing gefixt mit den Bulletpoints, sollte nun funktionieren.
 
-4. ToDo: 
+4. ToDo:
 - Routing mit Namen
-- Adressfelder Vorschläge --> Datenbank
+- Adressfelder Vorschläge --> Browserseitig
 - Häufigste Suchanfragen
-- SQL Injection Angriffe verhindern. 
+- SQL Injection Angriffe verhindern.
 - Tests müssen funktionieren
 - API Endpoint zum speichern von persönlichen Routen. --> Dokumentation mit Swagger
