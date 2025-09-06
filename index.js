@@ -18,7 +18,7 @@ app.use(session({
     secret: '9bXQM0LXf+t4yq64hdtEHmEEHx91FIxC4L7z3JnDE6IZhcZSL8TIBMNrPBz822htQTBCXP2Gks+exKGxGKO33g==',
 }));
 
-router.get('/routes', (req, res, next) => {
+router.get('/api/v1/routes', (req, res, next) => {
     db.one({
         name: 'routes-index',
         text: 'SELECT * FROM routes WHERE session = $1 ORDER BY count DESC',
