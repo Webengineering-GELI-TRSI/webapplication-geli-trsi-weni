@@ -6,4 +6,4 @@ COPY . .
 RUN npm ci
 
 EXPOSE 80
-CMD ["main.js"]
+CMD ["index.js"]
