@@ -3,7 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const pgp = require('pg-promise')();
 
-const PORT = 80;
+const PORT = 3000;
 
 const db = pgp({
     host: 'localhost',
