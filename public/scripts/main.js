@@ -49,7 +49,10 @@ if (
                 ];
 
                 L.Routing.control({
-                    router: new L.Routing.OpenRouteService(token, { timeout: 30 * 1000 }),
+                    router: new L.Routing.OpenRouteService(token, { 
+			timeout: 30 * 1000,
+		        language: 'de'
+		    }),
                     waypoints: waypoints,
                     show: true,
                     routeWhileDragging: false
@@ -74,7 +77,10 @@ if (
         ];
 
         L.Routing.control({
-            router: new L.Routing.OpenRouteService(token, { timeout: 30 * 1000 }),
+            router: new L.Routing.OpenRouteService(token, { 
+		timeout: 30 * 1000, 
+	        language: 'de'
+	    }),
             waypoints: waypoints,
             show: true,
             routeWhileDragging: false
