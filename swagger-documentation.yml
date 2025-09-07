@@ -1,0 +1,103 @@
+openapi: 3.0.4
+info:
+  title: Swagger Documentation Webapp
+  description: |-
+    This is our webapp swagger documentation for the route-webapp.
+
+    Some useful links:
+    - [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)
+    - [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)
+  termsOfService: https://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.12
+externalDocs:
+  description: Find out more about Swagger
+  url: https://swagger.io
+servers:
+  - url: http://78.47.81.216/api/v1
+tags:
+  - name: route
+    description: Get driving routes
+paths:
+  /routes:
+    get:
+      tags:
+        - route
+      summary: Get routes
+      description: Get routes, searched by user
+      operationId: updatePet
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Route not found
+        '422':
+          description: Validation exception
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Route:
+      required:
+        - name
+        - photoUrls
+      type: object
+      properties:
+        session:
+          type: integer
+          format: int64
+          example: 10
+        from: 
+          type: string
+          example: Bern, Schweiz
+        fromCord: 
+          type: integer
+          format: float
+          example: 90.123123
+        to:
+          type: string
+          example: Bern, Schweiz
+        toCord:
+          type: integer
+          format: float
+          example: 90.123123
+        count:
+          type: integer
+          format: int64
+          example: 12
+      xml:
+        name: pet
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - from
+        - to
+  securitySchemes:
+
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
