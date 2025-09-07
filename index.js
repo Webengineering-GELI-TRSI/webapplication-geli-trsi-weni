@@ -17,6 +17,8 @@ const app = express();
 
 app.use(session({
     secret: '9bXQM0LXf+t4yq64hdtEHmEEHx91FIxC4L7z3JnDE6IZhcZSL8TIBMNrPBz822htQTBCXP2Gks+exKGxGKO33g==',
+    resave: false,
+    saveUninitialized: false,
 }));
 
 app.get('/api/v1/routes', (req, res, next) => {
