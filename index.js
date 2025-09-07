@@ -22,7 +22,7 @@ app.use(session({
 app.get('/api/v1/routes', (req, res, next) => {
     db.one({
         name: 'routes-index',
-        text: 'SELECT * FROM routes WHERE session = $1 ORDER BY count DESC',
+        text: 'SELECT *, count(*) FROM routes WHERE session = $1 GROUP BY from, to ORDER BY count(*) DESC',
         values: [
             req.session.id
         ]

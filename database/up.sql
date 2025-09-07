@@ -4,5 +4,4 @@ CREATE TABLE IF NOT EXISTS 'routes' (
     `fromCord` text NOT NULL,
     `to` text NOT NULL,
     `toCord` text NOT NULL,
-    `count` bigint NOT NULL,
 );
